@@ -1,6 +1,7 @@
 #include <iostream>
 
-int main(void)
+// 총 5개의 정수를 입력 받아, 그 합을 출력
+int main1(void)
 {
 	int val1, val2, val3, val4, val5;
 	int result = 0;
@@ -19,4 +20,5 @@ int main(void)
 	result = val1 + val2 + val3 + val4 + val5;
 
 	std::cout << "합계: " << result;
+	return 0;
 }
