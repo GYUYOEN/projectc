@@ -2,15 +2,15 @@
 
 using namespace std;
 
-int main1(void)
+int main(void)
 {
 	const int num = 12;
 
 	const int *ptr = &num;
 
-	const int& ref = *ptr;
+	const int *(&ref) = ptr;
 
 	cout << "num : " << num << " " << &num << endl;
 	cout << "ptr : " << ptr << " " << *ptr << endl;
-	cout << "ref : " << ref << " " << &ref << endl;
+	cout << "ref : " << ref << " " << &ref << " " << *ref << " " << *(&ref) << endl;
 }
