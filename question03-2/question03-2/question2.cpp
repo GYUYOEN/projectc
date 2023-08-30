@@ -22,7 +22,7 @@ void Printer::ShowString()
 	cout << c << endl;
 };
 
-int main(void)
+int main2(void)
 {
 	Printer pnt;
 	pnt.SetString("Hello world!");
