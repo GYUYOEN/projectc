@@ -9,7 +9,7 @@ private:
 	int myMoney;
 
 public:
-	void InitMembers(const int& price, const int& num, const int& money)
+	void InitMembers(int price, int num, int money)
 	{
 		APPLE_PRICE = price;
 		numOfApples = num;
@@ -17,9 +17,9 @@ public:
 	}
 	int SaleApples(int money)
 	{
-		if (numOfApples <= 0)
+		if (money < 0)
 		{
-			cout << "팔수있는 사과수가 더이상 업습니다." << endl;
+			cout << "잘못된 정보가 전달되어 판매를 취소합니다." << endl;
 			return 0;
 		}
 		int num = money / APPLE_PRICE;
@@ -40,13 +40,19 @@ class FruitBuyer
 	int numOfApples;
 
 public:
-	void InitMembers(const int &money)
+	void InitMembers(int money)
 	{
 		myMoney = money;
 		numOfApples = 0;
 	}
 	void BuyApples(FruitSeller& seller, int money)
 	{
+		if (money < 0)
+		{
+			cout << "잘못된 정보가 전달되어 판매를 취소합니다." << endl;
+			return;
+		}
+
 		numOfApples += seller.SaleApples(money);
 		myMoney -= money;
 	}
@@ -60,20 +66,15 @@ public:
 int main(void)
 {
 	FruitSeller seller;
-	seller.InitMembers(1000, 20, 0);
-	if (!(seller.SaleApples(1000) == 0))
-	{
-		FruitBuyer buyer;
-		buyer.InitMembers(5000);
-		buyer.BuyApples(seller, 2000);
+	seller.InitMembers(1000, 0, 0);
+	FruitBuyer buyer;
+	buyer.InitMembers(5000);
+	buyer.BuyApples(seller, 2000);
 
-		cout << "과일 판매자의 현황" << endl;
-		seller.ShowSalesResult();
-		cout << "과일 구매자의 현황" << endl;
-		buyer.ShowBuyResult();
-	}
-
-	cout << "판매 가능 사과 없음" << endl;
+	cout << "과일 판매자의 현황" << endl;
+	seller.ShowSalesResult();
+	cout << "과일 구매자의 현황" << endl;
+	buyer.ShowBuyResult();
 
 	return 0;
 }
